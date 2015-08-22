@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Canvas thumbnail example for mobile</title>
+<script type="text/javascript">
+function getThumbnail(original, scale) {
+  var canvas = document.createElement("canvas")
+  canvas.width = original.width * scale
+  canvas.height = original.height * scale
+
+  canvas.getContext("2d").drawImage
+    (original, 0, 0, canvas.width, canvas.height)
+ return canvas
+}
+
+function startThumb(){
+	//this is expensive
+	var image = document.getElementsByTagName("img")[0];
+	var thumbnail = getThumbnail(image, 1/5)
+	document.body.appendChild(thumbnail)
+}
+</script>
+</head>
+<body onload="startThumb();">
+<img id="dog" src = "dog.jpg" style="display:none"/>
+</body>
+</html>

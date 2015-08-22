@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Canvas thumbnail example for mobile</title>
+<script type="text/javascript">
+ var x = 0;
+ var y = 0;
+ var dynamicVarName;
+ var context;
+ var scale;
+ var gutter;
+
+function startThumb(){
+    scale  =.2;
+	  gutter = 5;
+    dynamicVarName = 'imageObj';
+    canvas = document.getElementById("allpics");
+    ctx = canvas.getContext('2d');
+    for (var i = 1;i<=2;i++){
+    (function(ctx, image, imgsrc) { 
+    window[dynamicVarName + i] = new Image();
+    window[dynamicVarName + i].src = 'images/' + i + '.jpg';
+    window[dynamicVarName + i].onload = function() {
+    //width = window[dynamicVarName + i].width * scale;
+    //height = window[dynamicVarName + i].height * scale;
+    ctx.drawImage(window[dynamicVarName + i], x, y,100,100);
+      }; //closes onload function
+    image.src = imgsrc; 
+     }//closed immediate function
+    )(ctx, img, imgsrc); 
+    y += 200;
+ } //closes for loop
+}//closes function
+
+
+
+
+
+function createImage(canvas,i){
+  context = canvas.getContext('2d');
+  y += 250;
+  window[dynamicVarName + i] = new Image();
+  window[dynamicVarName + i].src = 'images/' + i + '.jpg';
+  window[dynamicVarName + i].onload = function (){
+  width = window[dynamicVarName + i].width * scale;
+  height = window[dynamicVarName + i].height * scale;
+  context.drawImage(window[dynamicVarName + i], x, y,width,height);
+    }
+  }
+</script>
+</head>
+<body onload="startThumb();">
+<canvas id="allpics" width="600" height="1200">
+
+</canvas>
+</body>
+</html>
